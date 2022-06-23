@@ -4,7 +4,7 @@ The tool simulates the network by generating calls for the given time period and
 - regular subscribers
 - semi-pro subscribers (small/medium business customers)
 - pro subscribers (huge customers like call-centers etc.)
-- sim boxes (used for froud)
+- sim boxes (used for fraud)
 
 
 Each category is characterised by several attributes (hard-coded in the simulator) that determine subscribed willingness to make a local or international call, move to a different BTS, call his friends vs random numbers, etc. Each subscriber may also have more than one sim card and the probability of that is also determined by the category.
@@ -24,4 +24,32 @@ The simulator generates two csv files:
   - msisdn - phone number assigned to IMSI
   - imsi_per_cust - number of active sim card for the customer
   - trusted - is the customer trusted (set for big pro customers)
-  - is_froud - is the IMSI confirmed froud (sim box)
+  - is_fraud - is the IMSI confirmed fraud (sim box)
+
+## Running the tool
+
+The tool requires python3 to run.
+
+```
+$ python3 main.py -h
+usage: main.py [-h] [--from-day FROM_DAY] --days DAYS --sub SUB --pro PRO
+               --spro SPRO --simbox SIMBOX
+
+Mobile Network Simulator
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --from-day FROM_DAY  The first day YYYY-MM-DD
+  --days DAYS          Number of days simulated
+  --sub SUB            Number of regular subscribers
+  --pro PRO            Number of professional subscribers
+  --spro SPRO          Number of semi-professional subscribers
+  --simbox SIMBOX      Number of simboxes
+``` 
+
+Examples:
+
+Simulating a network with 100000 subscribers (90000 regular, 6000 pro, 3000 semi-pro, and 1000 sim boxes) for 7 days starting from 2022-06-06
+```
+python3 main.py --from 2022-06-06 --days 7 --sub 90000 --pro 6000 --spro 3000 --sim 1000
+```
