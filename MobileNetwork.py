@@ -77,7 +77,7 @@ class MobileNetwork(object):
     def register_imsi(self, imsi: Imsi):
         self.imsis[imsi.id] = imsi
         if not self._imsi_header_printed:
-            print("imsi,msisdn,imsi_per_cust,trusted,is_froud", file=self.f3)
+            print("imsi,msisdn,imsi_per_cust,trusted,is_fraud", file=self.f3)
             self._imsi_header_printed = True
         print("{},{},{},{},{}".format(imsi.id, imsi.msisdn, imsi.imsi_per_cust, imsi.trusted,
                                       0 if imsi.id < 9000000 else 1), file=self.f3)
