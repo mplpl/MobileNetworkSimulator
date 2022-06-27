@@ -51,19 +51,51 @@ class MobileNetwork(object):
 
     def current_activity_profile(self):
 
+        wd = self.now.weekday()
+
+        if wd == 0:
+            mod = 1.2
+        elif wd == 1:
+            mod = 1.3
+        elif wd == 2:
+            mod = 1.3
+        elif wd == 3:
+            mod = 1.5
+        elif wd == 4:
+            mod = 1.4
+        elif wd == 5:
+            mod = 0.6
+        else:
+            mod = 0.6
+
         if self.minute < 360:  # 6am
-            return 0.1
+            return 0.1 * mod
+
+        if self.minute < 480:  # 8am
+            return 0.3 * mod
+
+        if self.minute < 600:  # 10am
+            return 0.4 * mod
 
         if self.minute < 720:  # 12am
-            return 0.5
+            return 0.5 * mod
+
+        if self.minute < 840:  # 14am
+            return 0.6 * mod
 
         if self.minute < 1020:  # 5pm
-            return 0.7
+            return 0.7 * mod
+
+        if self.minute < 1200:  # 8pm
+            return 0.6 * mod
+
+        if self.minute < 1260:  # 9pm
+            return 0.4 * mod
 
         if self.minute < 1320:  # 10pm
-            return 0.5
+            return 0.3 * mod
 
-        return 0.2
+        return 0.2 * mod
 
     def is_in_call(self, imsi: int):
 
