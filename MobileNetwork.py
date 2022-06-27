@@ -66,36 +66,36 @@ class MobileNetwork(object):
         elif wd == 5:
             mod = 0.6
         else:
-            mod = 0.6
+            mod = 0.4
 
         if self.minute < 360:  # 6am
-            return 0.1 * mod
+            return 0.05 * mod
 
         if self.minute < 480:  # 8am
-            return 0.3 * mod
+            return 0.15 * mod
 
         if self.minute < 600:  # 10am
-            return 0.4 * mod
+            return 0.2 * mod
 
         if self.minute < 720:  # 12am
-            return 0.5 * mod
+            return 0.25 * mod
 
         if self.minute < 840:  # 14am
-            return 0.6 * mod
-
-        if self.minute < 1020:  # 5pm
-            return 0.7 * mod
-
-        if self.minute < 1200:  # 8pm
-            return 0.6 * mod
-
-        if self.minute < 1260:  # 9pm
-            return 0.4 * mod
-
-        if self.minute < 1320:  # 10pm
             return 0.3 * mod
 
-        return 0.2 * mod
+        if self.minute < 1020:  # 5pm
+            return 0.35 * mod
+
+        if self.minute < 1200:  # 8pm
+            return 0.3 * mod
+
+        if self.minute < 1260:  # 9pm
+            return 0.2 * mod
+
+        if self.minute < 1320:  # 10pm
+            return 0.15 * mod
+
+        return 0.1 * mod
 
     def is_in_call(self, imsi: int):
 
