@@ -6,8 +6,7 @@ The tool simulates the network by generating calls for the given time period and
 - pro subscribers (huge customers like call-centers etc.)
 - sim boxes (used for fraud)
 
-
-Each category is characterised by several attributes (hard-coded in the simulator) that determine subscribed willingness to make a local or international call, move to a different BTS, call his friends vs random numbers, etc. Each subscriber may also have more than one sim card and the probability of that is also determined by the category.
+Each category is characterised by several attributes (hard-coded in the simulator) that determine subscriber willingness to make a local or international call, move to a different BTS, call his friends vs random numbers, etc. Each subscriber may also have more than one sim card and the probability of that is also determined by the category.
 
 The simulator generates two csv files:
 - cdr.csv - each row is a call data record with:
@@ -32,7 +31,7 @@ The tool requires python3 to run.
 
 ```
 $ python3 main.py -h
-usage: main.py [-h] [--from-day FROM_DAY] --days DAYS --sub SUB --pro PRO
+usage: main.py [-h] --from-day FROM_DAY --days DAYS --sub SUB --pro PRO
                --spro SPRO --simbox SIMBOX
 
 Mobile Network Simulator
