@@ -51,16 +51,16 @@ class MobileNetwork(object):
 
     def current_activity_profile(self):
 
-        if self.minute < 3600:
+        if self.minute < 360:  # 6am
             return 0.1
 
-        if self.minute < 7200:
+        if self.minute < 720:  # 12am
             return 0.5
 
-        if self.minute < 1000:
+        if self.minute < 1020:  # 5pm
             return 0.7
 
-        if self.minute < 1200:
+        if self.minute < 1320:  # 10pm
             return 0.5
 
         return 0.2
@@ -118,6 +118,8 @@ class MobileNetwork(object):
     def progress(self):
 
         self.minute += 1
+        if self.minute >= 1440:
+            self.minute = 0
         self.now += datetime.timedelta(minutes=1)
 
         new_calls = []
