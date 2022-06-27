@@ -7,7 +7,7 @@ class SemiProImsiProfile(object):
 
     def generate_imsi(self, id: int):
 
-        activity_factor = random.randint(30, 60) / 100  # 0.4 - 0.8
+        activity_factor = random.randint(15, 30) / 100  # 0.15 - 0.3
         mobility_factor = random.randint(0, 50) / 100  # 0 - 0.05
         international_activity_factor = random.randint(0, 20) / 10000  # 0 - 0.002
         social_factor = s_factor(0.1, 0.3)

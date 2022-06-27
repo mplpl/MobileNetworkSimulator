@@ -7,7 +7,7 @@ class ProImsiProfile(object):
 
     def generate_imsi(self, id: int):
 
-        activity_factor = random.randint(40, 80) / 100  # 0.4 - 0.8
+        activity_factor = random.randint(20, 40) / 100  # 0.2 - 0.4
         mobility_factor = random.randint(0, 10) / 1000  # 0 - 0.01
         international_activity_factor = random.randint(0, 20) / 10000  # 0 - 0.002
         social_factor = s_factor(0.1, 0.3)

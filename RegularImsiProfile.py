@@ -7,7 +7,7 @@ class RegularImsiProfile(object):
 
     def generate_imsi(self, id: int):
 
-        activity_factor = random.randint(0, 20) / 100  # 0 - 0.2
+        activity_factor = random.randint(0, 10) / 100  # 0 - 0.1
         mobility_factor = random.randint(0, 20) / 100  # 0 - 0.2
         international_activity_factor = random.randint(0, 20) / 10000  # 0 - 0.02
         social_factor = s_factor(0.5, 0.3)

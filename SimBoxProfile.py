@@ -7,7 +7,7 @@ class SimBoxProfile(object):
 
     def generate_imsi(self, id: int):
 
-        activity_factor = random.randint(60, 90) / 100  # 0.6 - 0.9
+        activity_factor = random.randint(30, 50) / 100  # 0.3 - 0.5
         mobility_factor = random.randint(0, 10) / 10000  # 0 - 0.001
         international_activity_factor = random.randint(0, 10) / 10000  # 0 - 0.001
         social_factor = s_factor(0.1, 0.1)
