@@ -5,6 +5,7 @@ s_factor = namedtuple('s_factor', ['friends', 'half_friends'])
 
 taken_msisdns = set()
 
+
 class Imsi(object):
 
     def __init__(self, id, activity_factor, mobility_factor, international_activity_factor,
@@ -25,6 +26,7 @@ class Imsi(object):
         self.msisdn = msisdn
         self.imsi_per_cust = imsi_per_cust
         self.trusted = trusted
+        self.customer_id = -1
 
     def add_friends(self, friend):
         self.friends.append(friend)

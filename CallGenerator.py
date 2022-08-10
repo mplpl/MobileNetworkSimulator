@@ -1,8 +1,5 @@
 from MobileNetwork import MobileNetwork
-from SimBoxProfile import SimBoxProfile
-from RegularImsiProfile import RegularImsiProfile
-from ProImsiProfile import ProImsiProfile
-from SemiProProfile import SemiProImsiProfile
+from ImsiGenerator import ImsiGenerator
 import random
 import datetime
 
@@ -13,58 +10,12 @@ class CallGenerator(object):
         self.imsis = []
         self.network = None
 
-    def generate_imsis(self, simboxes_count: int, regulars_count: int, pros_count: int, semi_pros_count: int):
-
-        sim_profile = SimBoxProfile()
-        imsi_id = 9000000
-
-        for i in range(simboxes_count):
-            imsi = sim_profile.generate_imsi(id=imsi_id)
-            self.imsis.append(imsi)
-            self.network.register_imsi(imsi)
-            imsi_id += 1
-
-        regular_profile = RegularImsiProfile()
-
-        prev = []
-
-        imsi_id = 1000000
-        for i in range(regulars_count):
-            imsi = regular_profile.generate_imsi(id=imsi_id)
-            for prev_imsi in prev:
-                imsi.add_friends(prev_imsi.id)
-                prev_imsi.add_friends(imsi.id)
-            if i >= 10:
-                prev.pop(0)
-            prev.append(imsi)
-            self.imsis.append(imsi)
-            self.network.register_imsi(imsi)
-            imsi_id += 1
-
-        pro_profile = ProImsiProfile()
-
-        imsi_id = 2000000
-        for i in range(pros_count):
-            imsi = pro_profile.generate_imsi(id=imsi_id)
-            self.imsis.append(imsi)
-            self.network.register_imsi(imsi)
-            imsi_id += 1
-
-        semi_pro_profile = SemiProImsiProfile()
-
-        imsi_id = 3000000
-        for i in range(semi_pros_count):
-            imsi = semi_pro_profile.generate_imsi(id=imsi_id)
-            self.imsis.append(imsi)
-            self.network.register_imsi(imsi)
-            imsi_id += 1
-
     def random_imsi(self):
         x = random.randint(0, len(self.imsis) - 1)
         return self.imsis[x].id
 
     def go(self, from_day: datetime.datetime, days: int, simboxes_count: int, regulars_count: int, pros_count: int,
-           semi_pro_count: int):
+           semi_pro_count: int, simbox_start_msisdn: int):
 
         print("Mobile Network Simulator")
         print()
@@ -74,10 +25,14 @@ class CallGenerator(object):
         print("Number of professional subscribers: {}".format(pros_count))
         print("Number of semi-professional subscribers: {}".format(pros_count))
         print("Number of simboxes: {}".format(simboxes_count))
+        print("Simbox start MSISDN: {}".format(simbox_start_msisdn))
         print("")
 
+        random.seed()
+
         self.network = MobileNetwork(from_day=from_day)
-        self.generate_imsis(simboxes_count, regulars_count, pros_count, semi_pro_count)
+        self.imsis = ImsiGenerator(self.network).generate_imsis(simboxes_count, regulars_count,
+                                                                pros_count, semi_pro_count, simbox_start_msisdn)
         day = 0
 
         while day < days:

@@ -5,14 +5,15 @@ import random
 
 class SimBoxProfile(object):
 
-    def generate_imsi(self, id: int):
+    def generate_imsi(self, id: int, imsi_per_cust: int = 0):
 
         activity_factor = random.randint(30, 50) / 100  # 0.3 - 0.5
         mobility_factor = random.randint(0, 10) / 10000  # 0 - 0.001
         international_activity_factor = random.randint(0, 10) / 10000  # 0 - 0.001
         social_factor = s_factor(0.1, 0.1)
         location = random.randint(1000, 2000)
-        imsi_per_cust = random.randint(50, 300)
+        if imsi_per_cust == 0:
+            imsi_per_cust = random.randint(50, 100)
 
         return Imsi(id=id, activity_factor=activity_factor, mobility_factor=mobility_factor,
                     international_activity_factor=international_activity_factor, social_factor=social_factor,
